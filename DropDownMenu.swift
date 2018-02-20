@@ -91,11 +91,7 @@ open class DropDownMenu : UIView, UITableViewDataSource, UITableViewDelegate, UI
     //
     // Corner radius default is 0
     //
-    open var cornerRadius : CGFloat  = 0.0 {
-        didSet {
-            menuView.layer.cornerRadius = cornerRadius
-        }
-    }
+    open var cornerRadius : CGFloat  = 0.0
 	open var direction = DropDownMenuRevealDirection.down
 	open let menuView: UITableView
 	open var menuCells = [DropDownMenuCell]() {
@@ -161,10 +157,13 @@ open class DropDownMenu : UIView, UITableViewDataSource, UITableViewDelegate, UI
 		let contentHeight = menuCells.reduce(0) { $0 + $1.rowHeight }
 		let maxContentHeight = frame.height - visibleContentInsets.bottom - visibleContentInsets.top
 		let scrollable = contentHeight > maxContentHeight
-
+        
+        //set corners
+        menuView.roundCorners([.bottomRight, .bottomLeft], radius: cornerRadius)
+        
 		menuView.frame.size.height = scrollable ? maxContentHeight : contentHeight
 		contentView.frame.size.height = menuView.frame.height
-
+        
 		// Reset scroll view content offset after rotation
 		if menuView.visibleCells.isEmpty {
 			return
@@ -307,4 +306,14 @@ open class DropDownMenu : UIView, UITableViewDataSource, UITableViewDelegate, UI
 
 		UIApplication.shared.sendAction(cell.menuAction, to: cell.menuTarget, from: cell, for: nil)
 	}
+}
+extension UITableView {
+    
+    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+    }
+    
 }
