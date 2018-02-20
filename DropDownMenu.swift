@@ -65,7 +65,6 @@ open class DropDownMenu : UIView, UITableViewDataSource, UITableViewDelegate, UI
 	// useful to ensure the menu won't be covered by the toolbar or navigation 
 	// bar once the showing animation is done.
 	//
-	// Left and right insets are currently ignored.
 	open var visibleContentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) {
 		didSet {
 			guard let container = container else {
@@ -73,7 +72,11 @@ open class DropDownMenu : UIView, UITableViewDataSource, UITableViewDelegate, UI
 			}
 			// Menu height needs to be recomputed
 			setNeedsLayout()
-
+            
+            // Use left and right insets
+            let tableFame = CGRect(x: visibleContentInsets.left, y: 0, width: frame.size.width - visibleContentInsets.left - visibleContentInsets.right, height: frame.size.height)
+            menuView.frame = tableFame
+            
 			if isHidden {
 				return
 			}
@@ -85,6 +88,14 @@ open class DropDownMenu : UIView, UITableViewDataSource, UITableViewDelegate, UI
 			}
 		}
 	}
+    //
+    // Corner radius default is 0
+    //
+    open var cornerRadius : CGFloat  = 0.0 {
+        didSet {
+            menuView.layer.cornerRadius = cornerRadius
+        }
+    }
 	open var direction = DropDownMenuRevealDirection.down
 	open let menuView: UITableView
 	open var menuCells = [DropDownMenuCell]() {
@@ -113,11 +124,13 @@ open class DropDownMenu : UIView, UITableViewDataSource, UITableViewDelegate, UI
 		contentView.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
 		
 		menuView = UITableView(frame: CGRect(origin: CGPoint.zero, size: frame.size))
+        menuView.clipsToBounds = true
 		menuView.autoresizingMask = .flexibleWidth
 		menuView.isScrollEnabled = true
 		menuView.bounces = false
 		menuView.showsVerticalScrollIndicator = true
 		menuView.showsHorizontalScrollIndicator = false
+        menuView.separatorStyle = .none
 
 		contentView.addSubview(menuView)
 
