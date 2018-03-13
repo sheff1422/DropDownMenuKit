@@ -159,7 +159,7 @@ open class DropDownMenu : UIView, UITableViewDataSource, UITableViewDelegate, UI
 		let scrollable = contentHeight > maxContentHeight
         
         //set corners
-        menuView.roundCorners([.bottomRight, .bottomLeft], radius: cornerRadius)
+//        menuView.roundCorners([.bottomRight, .bottomLeft], radius: cornerRadius)
         
 		menuView.frame.size.height = scrollable ? maxContentHeight : contentHeight
 		contentView.frame.size.height = menuView.frame.height

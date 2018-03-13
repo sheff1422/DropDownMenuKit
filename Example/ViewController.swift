@@ -27,6 +27,8 @@ class ViewController: UIViewController, DropDownMenuDelegate {
 
 		navigationBarMenu.container = view
 		toolbarMenu.container = view
+        navigationBarMenu.visibleContentInsets = UIEdgeInsetsMake(0, 20, 0, 20)
+        navigationBarMenu.cornerRadius = 20.0
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
