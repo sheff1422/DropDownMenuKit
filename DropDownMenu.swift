@@ -76,10 +76,12 @@ open class DropDownMenu : UIView, UITableViewDataSource, UITableViewDelegate, UI
 			menuView.contentInsetAdjustmentBehavior = .never
 			menuView.insetsContentViewsToSafeArea = false
 		}
+		menuView.clipsToBounds = true
 		menuView.isScrollEnabled = true
 		menuView.bounces = false
 		menuView.showsVerticalScrollIndicator = true
 		menuView.showsHorizontalScrollIndicator = false
+		menuView.separatorStyle = .none
 		menuView.dataSource = self
 		menuView.delegate = self
 
@@ -124,6 +126,9 @@ open class DropDownMenu : UIView, UITableViewDataSource, UITableViewDelegate, UI
 		didSet {
 			// Menu height needs to be recomputed
 			setNeedsLayout()
+			// Use left and right insets
+			let tableFame = CGRect(x: visibleContentInsets.left, y: 0, width: frame.size.width - visibleContentInsets.left - visibleContentInsets.right, height: frame.size.height)
+			menuView.frame = tableFame
 		}
 	}
 	open var direction = DropDownMenuRevealDirection.down {
@@ -131,6 +136,11 @@ open class DropDownMenu : UIView, UITableViewDataSource, UITableViewDelegate, UI
 			setNeedsLayout()
 		}
 	}
+	
+	//
+	// Corner radius default is 0
+	//
+	open var cornerRadius : CGFloat  = 0.0
 
 	public enum Operation {
 		case show
