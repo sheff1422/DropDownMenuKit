@@ -17,24 +17,34 @@ open class DropDownMenuCell : UITableViewCell {
 			contentView.addSubview(customView)
 		}
 	}
-	open var menuAction: Selector!
-	open weak var menuTarget: AnyObject!
+    /// For an app extension, the selector must take an argument.
+	open var menuAction: Selector?
+    /// For an app extension, the menu target must not be nil.
+	open weak var menuTarget: AnyObject?
 	open var showsCheckmark = true
 	open var rowHeight: CGFloat = 44
 
 	// MARK: - Initialization
 
-	override public init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+	override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		 fatalError("init(style:reuseIdentifier:) is not supported")
 	}
 	
 	public init() {
 		super.init(style: .default, reuseIdentifier: NSStringFromClass(DropDownMenuCell.self))
-		textLabel?.text = "Untitled"
+		setUp()
 	}
 
 	required public init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
+		super.init(coder: aDecoder)
+	}
+
+	open override func awakeFromNib() {
+		setUp()
+	}
+
+	private func setUp() {
+		textLabel?.text = "Untitled"
 	}
 	
 	// MARK: - Layout

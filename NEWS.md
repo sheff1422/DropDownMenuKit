@@ -1,6 +1,18 @@
 DropDownMenuKit NEWS
 ====================
 
+0.9
+---
+
+- Migrated to Swift 5
+- New custom transition API
+- Fixed menu cells not always visible during hiding animation on iOS 11 and higher
+
+0.8.6
+-----
+
+- Migrated to Swift 4.2
+
 0.8.5
 -----
 
@@ -9,6 +21,8 @@ DropDownMenuKit NEWS
 	- adding/removing menu entries
 	- menu scrolling
 	- long title support
+- Now usable in app extensions 
+	- DropDownMenuKit > Build Settings > Other Swift Flags must include -DAPP_EXTENSION 
 
 0.8.4
 -----

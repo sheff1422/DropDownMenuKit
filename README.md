@@ -3,9 +3,8 @@ DropDownMenuKit
 
 [![Build Status](https://travis-ci.org/qmathe/DropDownMenuKit.svg?branch=master)](https://travis-ci.org/qmathe/DropDownMenuKit)
 [![Platforms iOS](https://img.shields.io/badge/Platforms-iOS-lightgray.svg?style=flat)](http://www.apple.com)
-[![Language Swift 4.0](https://img.shields.io/badge/Language-Swift%204.0-orange.svg?style=flat)](https://swift.org)
+[![Language Swift 5](https://img.shields.io/badge/Language-Swift%205-orange.svg?style=flat)](https://swift.org)
 [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/qmathe/DropDownMenuKit/LICENSE)
-[![README Russian](https://img.shields.io/badge/readme-Russian-yellow.svg)](http://gargo.of.by/dropdownmenukit/)
 
 DropDownMenuKit is a custom UIKit control to show a menu attached to the navigation bar or toolbar. The menu appears with a sliding animation and can be deeply customized. For example, with icons, embedded controls, or a checkmark to denote a selected row among multiple menu cells.
 
@@ -23,13 +22,14 @@ To see in action, take a look at the very beginning of [Placeboard](http://www.p
 Compatibility
 -------------
 
-DropDownMenuKit requires Xcode 9 and supports iOS 8 or higher.
+DropDownMenuKit requires at least Xcode 9 and supports iOS 8 and higher.
 
 | Swift   | DropDownMenuKit                                                                                                                                                                                                                            |
 | ------- |  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  |
-| 4.X      | [master](https://github.com/qmathe/DropDownMenuKit/tree/master)                                                                                                                                             |
+| 5         | [0.9](https://github.com/qmathe/DropDownMenuKit/releases/tag/0.9) or branch [swift-5](https://github.com/qmathe/DropDownMenuKit/tree/swift-5) |
+| 4.2      | [0.8.6](https://github.com/qmathe/DropDownMenuKit/releases/tag/0.8.6) or branch [swift-4.2](https://github.com/qmathe/DropDownMenuKit/tree/swift-4.2) |
+| 4.X      | [0.8.5](https://github.com/qmathe/DropDownMenuKit/releases/tag/0.8.5) or branch [swift-4.1](https://github.com/qmathe/DropDownMenuKit/tree/swift-4.1) |
 | 3.X      | [0.8.4](https://github.com/qmathe/DropDownMenuKit/releases/tag/0.8.4) or branch [swift-3.2](https://github.com/qmathe/DropDownMenuKit/tree/swift-3.2) |
-| >= 2.2 | [0.8.1](https://github.com/qmathe/DropDownMenuKit/releases/tag/0.8.1) or branch [swift-2.2](https://github.com/qmathe/DropDownMenuKit/tree/swift-2.2) |
 
 Installation
 ------------
@@ -59,3 +59,16 @@ Build DropDownMenuKit framework and drop it into your Xcode project.
 #### Files
 
 Drop DropDownMenu.swift, DropDownMenuCell.swift, DropDownTitleView.swift and DropDownMenuKit.xcassets into your Xcode project.
+
+
+App Extension Usage
+-------------------------
+
+### Build Settings
+
+Add **-DAPP_EXTENSION** to _DropDownMenuKit > Build Settings > Other Swift Flags_.
+
+### Restrictions
+
+- `DropDownMenuCell.menuAction` must take a single argument
+- `DropDownMenuCell.menuTarget` must not be nil
